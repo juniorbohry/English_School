@@ -22,6 +22,8 @@ app.use(express.json())
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 
 //Routes
+const PersonRoute = require('./routes/PersonRoute')
+app.use('/person', PersonRoute)
 
 
 // Criar tabelas e rodar o app

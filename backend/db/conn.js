@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize')
+require('dotenv').config()
+const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
 
-const sequelize = new Sequelize('escola_ingles_02', 'root', '123321', {
+const sequelize = new Sequelize('escola_ingles_02', 'root', `${DB_PASSWORD}`, {
     host: 'localhost',
     dialect: 'mysql',
 })

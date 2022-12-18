@@ -23,7 +23,13 @@ app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 
 //Routes
 const PersonRoute = require('./routes/PersonRoute')
+const LevelRoute = require('./routes/LevelRoute')
+const ClassEnglishRoute = require('./routes/ClassEnglishRoute')
+const EnrollmentRoute = require('./routes/EnrollmentRoute')
 app.use('/person', PersonRoute)
+app.use('/level', LevelRoute)
+app.use('/class', ClassEnglishRoute)
+app.use('/enrollment', EnrollmentRoute)
 
 
 // Criar tabelas e rodar o app

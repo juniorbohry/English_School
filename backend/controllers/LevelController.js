@@ -19,4 +19,13 @@ module.exports = class LevelController {
             res.status(500).json({ message: error })
         }
     }
+
+    static async getAllLevels(req, res) {
+        try {
+            const allLevels = await Level.findAll({raw: true})
+            res.status(200).json(allLevels)
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

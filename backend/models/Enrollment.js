@@ -11,6 +11,10 @@ const Enrollment = db.define('Enrollment', {
         type: DataTypes.STRING,
         required: true
     },
+    active: {
+        type: DataTypes.BOOLEAN,
+        required: true,
+    },
 });
 
 Person.hasMany(Enrollment)

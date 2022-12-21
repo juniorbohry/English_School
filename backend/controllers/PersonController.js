@@ -41,4 +41,32 @@ module.exports = class PersonController {
             res.status(500).json({ message: error })
         }
     }
+
+    static async getAllPersonStudent(req, res) {
+        try {
+            const allStudents = await Person.findAll({
+                raw: true,
+                where: {
+                    teachingstaff: 0
+                }
+            })
+            res.status(200).json(allStudents)
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
+
+    static async getAllPersonTeachingStaff(req, res) {
+        try {
+            const allTeachingStaff = await Person.findAll({
+                raw: true,
+                where: {
+                    teachingstaff: 1
+                }
+            })
+            res.status(200).json(allTeachingStaff)
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

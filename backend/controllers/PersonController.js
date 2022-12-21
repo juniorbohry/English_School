@@ -69,4 +69,20 @@ module.exports = class PersonController {
             res.status(500).json({message: error})
         }
     }
+
+    static async getPersonById(req, res) {
+        const id = req.params.id
+
+        try {
+            const person = await Person.findOne({
+                raw: true,
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json(person)
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

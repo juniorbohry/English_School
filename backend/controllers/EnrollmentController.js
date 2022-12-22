@@ -75,4 +75,20 @@ module.exports = class EnrollmentController {
             res.status(500).json({message: error})
         }
     }
+
+    static async getEnrollmentById(req, res) {
+        const id = req.params.id
+
+        try {
+            const enrollment = await Enrollment.findOne({
+                raw: true,
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json(enrollment)
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

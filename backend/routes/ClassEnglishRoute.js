@@ -6,6 +6,7 @@ router.get("/", ClassEnglishController.getAllClass);
 router.get("/allclassbasic", ClassEnglishController.getAllClassBasic);
 router.get("/allclassintermediary", ClassEnglishController.getAllClassIntermediary);
 router.get("/allclassadvanced", ClassEnglishController.getAllClassAdvanced);
+router.get("/:id", ClassEnglishController.getClassById);
 
 
 module.exports = router;

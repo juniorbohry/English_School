@@ -84,4 +84,20 @@ module.exports = class ClassEnglishController {
             res.status(500).json({message: error})
         }
     }
+
+    static async getClassById(req, res) {
+        const id = req.params.id
+
+        try {
+            const classenglish = await Classenglish.findOne({
+                raw: true,
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json(classenglish)
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

@@ -28,4 +28,20 @@ module.exports = class LevelController {
             res.status(500).json({message: error})
         }
     }
+
+    static async getLevelById(req, res) {
+        const id = req.params.id
+
+        try {
+            const level = await Level.findOne({
+                raw: true,
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json(level)
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

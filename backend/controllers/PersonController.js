@@ -101,7 +101,6 @@ module.exports = class PersonController {
                 id: id
             }        
         })
-
         if(!person) {
             res.status(404).json({message: 'Pessoa não encontrada.'})
             return

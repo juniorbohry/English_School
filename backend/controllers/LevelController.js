@@ -47,4 +47,32 @@ module.exports = class LevelController {
             res.status(500).json({message: error})
         }
     }
+
+    //remove level by id
+    static async removeLevelById(req, res) {
+        const id = req.params.id
+
+        // check if level exists
+        const level = await Level.findOne({
+            raw: true,
+            where: {
+                id: id
+            }        
+        })
+        if(!level) {
+            res.status(404).json({message: 'Level não encontrado.'})
+            return
+        }
+
+        try {
+            await Level.destroy({
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json({message: 'Level removido com sucesso!'})
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

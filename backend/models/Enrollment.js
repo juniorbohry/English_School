@@ -17,7 +17,10 @@ const Enrollment = db.define('Enrollment', {
     },
 });
 
-Person.hasMany(Enrollment)
+Person.hasMany(Enrollment, {
+    //to restrict the "delete" method
+    onDelete: 'restrict'
+})
 Enrollment.belongsTo(Person)
 
 Classenglish.hasMany(Enrollment)

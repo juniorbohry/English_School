@@ -89,6 +89,8 @@ module.exports = class PersonController {
         }
     }
 
+    
+    //remove person by id
     static async removePersonById(req, res) {
         const id = req.params.id
 
@@ -99,12 +101,11 @@ module.exports = class PersonController {
                 id: id
             }        
         })
+
         if(!person) {
             res.status(404).json({message: 'Pessoa não encontrada.'})
             return
         }
-        console.log(person.id)
-
 
         try {
             await Person.destroy({

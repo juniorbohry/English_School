@@ -93,4 +93,32 @@ module.exports = class EnrollmentController {
             res.status(500).json({message: error})
         }
     }
+
+    //remove person by id
+    static async removeEnrollmentById(req, res) {
+        const id = req.params.id
+
+        // check if person exists
+        const enrollment = await Enrollment.findOne({
+            raw: true,
+            where: {
+                id: id
+            }        
+        })
+        if(!enrollment) {
+            res.status(404).json({message: 'Enrollment não encontrado.'})
+            return
+        }
+
+        try {
+            await Enrollment.destroy({
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json({message: 'Enrollment removido com sucesso!'})
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

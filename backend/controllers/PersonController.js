@@ -1,6 +1,7 @@
 const Person = require('../models/Person')
 
 module.exports = class PersonController {
+    // register a person
     static async register(req, res) {
         const name = req.body.name
         const email = req.body.email
@@ -32,7 +33,6 @@ module.exports = class PersonController {
             return
         }
 
-        //register person
         try {
             await Person.create({ name, email, age, teachingstaff })
             res.status(201).json({ message: `Pessoa registrada com sucesso!` })
@@ -42,6 +42,7 @@ module.exports = class PersonController {
         }
     }
 
+    // get all registered person students
     static async getAllPersonStudent(req, res) {
         try {
             const allStudents = await Person.findAll({
@@ -56,6 +57,7 @@ module.exports = class PersonController {
         }
     }
 
+    // get all registered Teaching Staff
     static async getAllPersonTeachingStaff(req, res) {
         try {
             const allTeachingStaff = await Person.findAll({
@@ -70,6 +72,7 @@ module.exports = class PersonController {
         }
     }
 
+    // get a specific person
     static async getPersonById(req, res) {
         const id = req.params.id
 
@@ -81,6 +84,35 @@ module.exports = class PersonController {
                 }
             })
             res.status(200).json(person)
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
+
+    static async removePersonById(req, res) {
+        const id = req.params.id
+
+        // check if person exists
+        const person = await Person.findOne({
+            raw: true,
+            where: {
+                id: id
+            }        
+        })
+        if(!person) {
+            res.status(404).json({message: 'Pessoa não encontrada.'})
+            return
+        }
+        console.log(person.id)
+
+
+        try {
+            await Person.destroy({
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json({message: 'Pessoa removida com sucesso!'})
         } catch(error) {
             res.status(500).json({message: error})
         }

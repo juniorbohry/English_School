@@ -1,6 +1,7 @@
 const Classenglish = require('../models/Classenglish')
 
 module.exports = class ClassEnglishController {
+    // register a class
     static async registerClass(req, res) {
         const name_class = req.body.name_class
         const PersonId = req.body.PersonId
@@ -21,10 +22,8 @@ module.exports = class ClassEnglishController {
             return
         }
 
-        //check teachingstaff
+        //falta verificar teachingstaff
         
-      
-        //register class
         try {
             await Classenglish.create({ name_class, PersonId, LevelId })
             res.status(201).json({ message: `Turma registrada com sucesso!` })
@@ -34,6 +33,7 @@ module.exports = class ClassEnglishController {
         }
     }
 
+    // get all class
     static async getAllClass(req, res) {
         try{
             const allClass = await Classenglish.findAll({raw: true})
@@ -43,6 +43,7 @@ module.exports = class ClassEnglishController {
         }
     }
 
+    // get all basic class 
     static async getAllClassBasic(req, res) {
         try {
             const allClassBasic = await Classenglish.findAll({
@@ -57,6 +58,7 @@ module.exports = class ClassEnglishController {
         }
     }
 
+    // get all intermediary class 
     static async getAllClassIntermediary(req, res) {
         try {
             const allClassIntermediary = await Classenglish.findAll({
@@ -71,6 +73,7 @@ module.exports = class ClassEnglishController {
         }
     }
 
+    // get all advanced class
     static async getAllClassAdvanced(req, res) {
         try {
             const allClassAdvanced = await Classenglish.findAll({
@@ -85,6 +88,7 @@ module.exports = class ClassEnglishController {
         }
     }
 
+    // get a specific class
     static async getClassById(req, res) {
         const id = req.params.id
 

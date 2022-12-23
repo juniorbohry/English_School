@@ -1,6 +1,7 @@
 const Level = require('../models/Level')
 
 module.exports = class LevelController {
+    // register a level
     static async registerLevel(req, res) {
         const description_level = req.body.description_level
        
@@ -20,6 +21,7 @@ module.exports = class LevelController {
         }
     }
 
+    // get all registered levels
     static async getAllLevels(req, res) {
         try {
             const allLevels = await Level.findAll({raw: true})
@@ -29,6 +31,7 @@ module.exports = class LevelController {
         }
     }
 
+    // get a specific level
     static async getLevelById(req, res) {
         const id = req.params.id
 

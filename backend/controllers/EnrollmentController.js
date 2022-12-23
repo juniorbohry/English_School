@@ -1,13 +1,13 @@
 const Enrollment = require('../models/Enrollment')
 
 module.exports = class EnrollmentController {
+    // register a enrollment
     static async registerEnrollment(req, res) {
         const made_by = req.body.made_by
         const active = req.body.active
         const PersonId = req.body.PersonId
         const ClassenglishId = req.body.ClassenglishId
         
-       
         //validations
         if(!made_by) {
             res.status(422).json({message: 'O responsável administrativo pela matrícula é obrigatório'})
@@ -25,11 +25,9 @@ module.exports = class EnrollmentController {
             res.status(422).json({message: 'ClassenglishId é obrigatório'})
             return
         }
-        
 
-        //verificar se a matricula já existe????
+        //falta verificar se a matricula já existe????
       
-        //register level
         try {
             await Enrollment.create({ made_by, active, PersonId, ClassenglishId })
             res.status(201).json({ message: `Matrícula realizada com sucesso!` })
@@ -39,6 +37,7 @@ module.exports = class EnrollmentController {
         }
     }
 
+    // get all enrollments
     static async getAllEnrollments(req, res) {
         try {
             const allEnrollments= await Enrollment.findAll({raw: true})
@@ -48,6 +47,7 @@ module.exports = class EnrollmentController {
         }
     }
 
+    // get all active enrollments
     static async getAllActiveEnrollments(req, res) {
         try {
             const allActiveEnrollments= await Enrollment.findAll({
@@ -62,6 +62,7 @@ module.exports = class EnrollmentController {
         }
     }
 
+    // get all inactive enrollments
     static async getAllInactiveEnrollments(req, res) {
         try {
             const allInactiveEnrollments= await Enrollment.findAll({
@@ -76,6 +77,7 @@ module.exports = class EnrollmentController {
         }
     }
 
+    // get a specific enrollment
     static async getEnrollmentById(req, res) {
         const id = req.params.id
 

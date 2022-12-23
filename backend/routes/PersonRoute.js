@@ -5,6 +5,7 @@ router.post("/register", PersonController.register);
 router.get("/allstudents", PersonController.getAllPersonStudent);
 router.get("/allteachingstaff", PersonController.getAllPersonTeachingStaff);
 router.get("/:id", PersonController.getPersonById);
+router.delete("/:id", PersonController.removePersonById);
 
 module.exports = router;
 

@@ -23,7 +23,10 @@ Person.hasMany(Enrollment, {
 })
 Enrollment.belongsTo(Person)
 
-Classenglish.hasMany(Enrollment)
+Classenglish.hasMany(Enrollment, {
+    //to restrict the "delete" method
+    onDelete: 'restrict'
+})
 Enrollment.belongsTo(Classenglish)
 
 module.exports = Enrollment;

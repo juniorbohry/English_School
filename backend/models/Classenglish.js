@@ -12,10 +12,16 @@ const Classenglish = db.define('Classenglish', {
     },
 });
 
-Person.hasMany(Classenglish)
+Person.hasMany(Classenglish, {
+    //to restrict the "delete" method
+    onDelete: 'restrict'
+})
 Classenglish.belongsTo(Person)
 
-Level.hasMany(Classenglish)
+Level.hasMany(Classenglish, {
+    //to restrict the "delete" method
+    onDelete: 'restrict'
+})
 Classenglish.belongsTo(Level)
 
 module.exports = Classenglish;

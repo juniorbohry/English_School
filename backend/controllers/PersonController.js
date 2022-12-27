@@ -117,4 +117,65 @@ module.exports = class PersonController {
             res.status(500).json({message: error})
         }
     }
+
+    static async updatePersonById(req, res) {
+        const id = req.params.id
+        const name = req.body.name
+        const email = req.body.email
+        const age = req.body.age
+        let teachingstaff = req.body.teachingstaff
+
+        const updatePerson = {}
+
+        // check if person exists
+        const person = await Person.findOne({
+            where: {
+                id: id
+            }
+        })
+        if (!person) {
+            res.status(404).json({message: 'Pessoa não encontrada.'})
+            return
+        }
+
+        //validations
+        if(!name) {
+            res.status(422).json({message: 'O nome é obrigatório'})
+            return
+        } else {
+            updatePerson.name = name
+        }
+
+        if(!email) {
+            res.status(422).json({message: 'O email é obrigatório'})
+            return
+        } else {
+            updatePerson.email = email
+        }
+
+        if(!age) {
+            res.status(422).json({message: 'A idade é obrigatória'})
+            return
+        } else {
+            updatePerson.age = age
+        }
+
+        if(teachingstaff !== 1 && teachingstaff !== 0 ) {
+            res.status(422).json({message: 'O campo é obrigatório'})
+            return
+        } else {
+            updatePerson.teachingstaff = teachingstaff
+        }
+
+        try {
+            await Person.update(updatePerson, {
+                where: {
+                    id: id
+                }
+            })
+            res.status(201).json({ message: `Pessoa atualizada com sucesso!` })
+        } catch (error) {
+            res.status(500).json({ message: error })
+        }
+    }
 }

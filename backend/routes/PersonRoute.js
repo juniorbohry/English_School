@@ -6,6 +6,7 @@ router.get("/allstudents", PersonController.getAllPersonStudent);
 router.get("/allteachingstaff", PersonController.getAllPersonTeachingStaff);
 router.get("/:id", PersonController.getPersonById);
 router.delete("/:id", PersonController.removePersonById);
+router.patch("/:id", PersonController.updatePersonById);
 
 module.exports = router;
 

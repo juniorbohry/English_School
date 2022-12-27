@@ -104,4 +104,32 @@ module.exports = class ClassEnglishController {
             res.status(500).json({message: error})
         }
     }
+
+    //remove class by id
+    static async removeClassById(req, res) {
+        const id = req.params.id
+
+        // check if class exists
+        const classenglish = await Classenglish.findOne({
+            raw: true,
+            where: {
+                id: id
+            }        
+        })
+        if(!classenglish) {
+            res.status(404).json({message: 'Turma não encontrada.'})
+            return
+        }
+
+        try {
+            await Classenglish.destroy({
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json({message: 'Turma removida com sucesso!'})
+        } catch(error) {
+            res.status(500).json({message: error})
+        }
+    }
 }

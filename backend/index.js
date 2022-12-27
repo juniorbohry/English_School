@@ -34,8 +34,8 @@ app.use('/enrollment', EnrollmentRoute)
 
 // Criar tabelas e rodar o app
 conn
-  .sync()
-  // .sync({force: true})
+  // .sync()
+  .sync({force: true})
   .then(() => {
     app.listen(5000)
   })

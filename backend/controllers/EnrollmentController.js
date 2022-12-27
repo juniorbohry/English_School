@@ -94,11 +94,11 @@ module.exports = class EnrollmentController {
         }
     }
 
-    //remove person by id
+    //remove enrollment by id
     static async removeEnrollmentById(req, res) {
         const id = req.params.id
 
-        // check if person exists
+        // check if enrollment exists
         const enrollment = await Enrollment.findOne({
             raw: true,
             where: {

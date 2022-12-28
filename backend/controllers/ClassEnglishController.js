@@ -6,7 +6,6 @@ module.exports = class ClassEnglishController {
         const name_class = req.body.name_class
         const PersonId = req.body.PersonId
         const LevelId = req.body.LevelId
-        console.log(name_class)
        
         //validations
         if(!name_class) {
@@ -130,6 +129,60 @@ module.exports = class ClassEnglishController {
             res.status(200).json({message: 'Turma removida com sucesso!'})
         } catch(error) {
             res.status(500).json({message: error})
+        }
+    }
+
+    // update class by Id
+    static async updateClassById(req, res) {
+        const id = req.params.id
+        const name_class = req.body.name_class
+        const PersonId = req.body.PersonId
+        const LevelId = req.body.LevelId
+
+        const updateClass = {}
+
+        // check if class exists
+        const classenglish = await Classenglish.findOne({
+            where: {
+                id: id
+            }
+        })
+        if (!classenglish) {
+            res.status(404).json({message: 'Turma não encontrada.'})
+            return
+        }
+       
+        //validations
+        if(!name_class) {
+            res.status(422).json({message: 'O nome da turma é obrigatório!'})
+            return
+        } else {
+            updateClass.name_class = name_class
+        }
+
+        if(!PersonId) {
+            res.status(422).json({message: 'PersonId é obrigatório!'})
+            return
+        } else {
+            updateClass.PersonId = PersonId
+        }
+
+        if(!LevelId) {
+            res.status(422).json({message: 'LevelId é obrigatório!'})
+            return
+        } else {
+            updateClass.LevelId = LevelId
+        }
+
+        try {
+            await Classenglish.update(updateClass, {
+                where: {
+                    id: id
+                }
+            })
+            res.status(201).json({ message: 'Turma atualizada com sucesso!' })
+        } catch (error) {
+            res.status(500).json({ message: error })
         }
     }
 }

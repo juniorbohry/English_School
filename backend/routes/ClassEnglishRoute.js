@@ -8,6 +8,7 @@ router.get("/allclassintermediary", ClassEnglishController.getAllClassIntermedia
 router.get("/allclassadvanced", ClassEnglishController.getAllClassAdvanced);
 router.get("/:id", ClassEnglishController.getClassById);
 router.delete("/:id", ClassEnglishController.removeClassById);
+router.patch("/:id", ClassEnglishController.updateClassById);
 
 
 module.exports = router;

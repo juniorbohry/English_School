@@ -26,7 +26,18 @@ module.exports = class EnrollmentController {
             return
         }
 
-        //falta verificar se a matricula já existe????
+        //check if the person is already enrolled in the same class.
+        const checkExisteEnrollment = await Enrollment.findAll({
+            raw: true,
+            where: {
+                PersonId: PersonId,
+                ClassenglishId: ClassenglishId
+            }
+        })
+        if(checkExisteEnrollment) {
+            res.status(422).json({message: 'Esta pessoa já está matriculada nesta turma ou possui matricula inativa!'}) 
+            return
+        }
       
         try {
             await Enrollment.create({ made_by, active, PersonId, ClassenglishId })

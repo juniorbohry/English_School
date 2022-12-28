@@ -75,4 +75,43 @@ module.exports = class LevelController {
             res.status(500).json({message: error})
         }
     }
+
+    // update level by id
+    static async updateLevelById(req, res) {
+        const id = req.params.id
+        const description_level = req.body.description_level
+
+        const updateLevel = {}
+
+        // check if level exists
+        const level = await Level.findOne({
+            where: {
+                id: id
+            }
+        })
+        if (!level) {
+            res.status(404).json({message: 'Level não encontrado!'})
+            return
+        }
+
+        //validations
+        if(!description_level) {
+            res.status(422).json({message: 'A descrição do nível é obrigatória'})
+            return
+        } else {
+            updateLevel.description_level = description_level
+        }
+
+
+        try {
+            await Level.update(updateLevel, {
+                where: {
+                    id: id
+                }
+            })
+            res.status(201).json({ message: 'Level atualizado com sucesso!' })
+        } catch (error) {
+            res.status(500).json({ message: error })
+        }
+    }
 }

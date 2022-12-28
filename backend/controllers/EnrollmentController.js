@@ -121,4 +121,66 @@ module.exports = class EnrollmentController {
             res.status(500).json({message: error})
         }
     }
+
+    // Update enrollment by Id
+    static async updateEnrollmentById(req, res) {
+        const id = req.params.id
+        const made_by = req.body.made_by
+        const active = req.body.active
+        const PersonId = req.body.PersonId
+        const ClassenglishId = req.body.ClassenglishId
+
+        const updateEnrollment = {}
+
+        // check if person exists
+        const enrollment = await Enrollment.findOne({
+            where: {
+                id: id
+            }
+        })
+        if (!enrollment) {
+            res.status(404).json({message: 'Matrícula não encontrada!'})
+            return
+        }
+        
+        //validations
+        if(!made_by) {
+            res.status(422).json({message: 'O responsável administrativo pela matrícula é obrigatório'})
+            return
+        } else {
+            updateEnrollment.made_by = made_by
+        }
+
+        if(active !== 1 && active !== 0) {
+            res.status(422).json({message: 'É  obrigatório marcar se a matrícula está ativa ou não'})
+            return
+        } else {
+            updateEnrollment.active = active
+        }
+
+        if(!PersonId) {
+            res.status(422).json({message: 'PersonId é obrigatório'})
+            return
+        } else {
+            updateEnrollment.PersonId = PersonId
+        }
+
+        if(!ClassenglishId) {
+            res.status(422).json({message: 'ClassenglishId é obrigatório'})
+            return
+        } else {
+            updateEnrollment.ClassenglishId = ClassenglishId
+        }
+        
+        try {
+            await Enrollment.update(updateEnrollment, {
+                where: {
+                    id: id
+                }
+            })
+            res.status(201).json({ message: 'Matrícula atualizada com sucesso!' })
+        } catch (error) {
+            res.status(500).json({ message: error })
+        }
+    }
 }

@@ -2,7 +2,7 @@ const Person = require('../models/Person')
 
 module.exports = class PersonController {
     // register a person
-    static async register(req, res) {
+    static async registerPerson(req, res) {
         const name = req.body.name
         const email = req.body.email
         const age = req.body.age

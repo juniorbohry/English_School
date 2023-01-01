@@ -42,7 +42,6 @@ module.exports = class EnrollmentController {
         try {
             await Enrollment.create({ made_by, active, PersonId, ClassenglishId })
             res.status(201).json({ message: `Matrícula realizada com sucesso!` })
-            // res.redirect('/')
         } catch (error) {
             res.status(500).json({ message: error })
         }

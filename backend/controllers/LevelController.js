@@ -15,7 +15,6 @@ module.exports = class LevelController {
         try {
             await Level.create({ description_level })
             res.status(201).json({ message: `Level registrado com sucesso!` })
-            // res.redirect('/')
         } catch (error) {
             res.status(500).json({ message: error })
         }

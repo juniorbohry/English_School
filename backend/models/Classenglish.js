@@ -1,7 +1,5 @@
-const { DataTypes } = require('sequelize');
-
-const db = require('../db/conn');
-
+const { DataTypes } = require('sequelize')
+const db = require('../db/conn')
 const Person = require('./Person')
 const Level = require('./Level')
 
@@ -10,7 +8,7 @@ const Classenglish = db.define('Classenglish', {
         type: DataTypes.STRING,
         required: true
     },
-});
+})
 
 Person.hasMany(Classenglish, {
     //to restrict the "delete" method
@@ -24,4 +22,4 @@ Level.hasMany(Classenglish, {
 })
 Classenglish.belongsTo(Level)
 
-module.exports = Classenglish;
+module.exports = Classenglish

@@ -24,7 +24,6 @@ module.exports = class ClassEnglishController {
         try {
             await Classenglish.create({ name_class, PersonId, LevelId })
             res.status(201).json({ message: `Turma registrada com sucesso!` })
-            // res.redirect('/')
         } catch (error) {
             res.status(500).json({ message: error })
         }

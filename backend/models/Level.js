@@ -1,6 +1,5 @@
-const { DataTypes } = require('sequelize');
-
-const db = require('../db/conn');
+const { DataTypes } = require('sequelize')
+const db = require('../db/conn')
 
 const Level = db.define('Level', {
     description_level: {
@@ -9,4 +8,4 @@ const Level = db.define('Level', {
     },
 });
 
-module.exports = Level;
+module.exports = Level

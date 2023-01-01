@@ -31,8 +31,7 @@ app.use('/level', LevelRoute)
 app.use('/class', ClassEnglishRoute)
 app.use('/enrollment', EnrollmentRoute)
 
-
-// Criar tabelas e rodar o app
+// Create table and run
 conn
   .sync()
   // .sync({force: true})

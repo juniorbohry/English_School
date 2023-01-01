@@ -20,8 +20,6 @@ module.exports = class ClassEnglishController {
             res.status(422).json({message: 'LevelId é obrigatório!'})
             return
         }
-
-        //falta verificar teachingstaff
         
         try {
             await Classenglish.create({ name_class, PersonId, LevelId })

@@ -8,12 +8,13 @@ module.exports = class PersonController {
         const age = req.body.age
         let teachingstaff = req.body.teachingstaff
 
-        // 0 and 1 teachingstaff
-        // if (teachingstaff === 'on') {
-        //     teachingstaff = true
-        // } else {
-        //     teachingstaff = false
-        // }
+        // 0 and 1  checkbox teachingstaff
+        if (teachingstaff === "on") {
+            teachingstaff = 1
+        } else if(teachingstaff !== 1 && teachingstaff !== "on"){
+            teachingstaff = 0
+        }
+
 
         //validations
         if(!name) {
@@ -26,10 +27,6 @@ module.exports = class PersonController {
         }
         if(!age) {
             res.status(422).json({message: 'A idade é obrigatória'})
-            return
-        }
-        if(teachingstaff !== 1 && teachingstaff !== 0 ) {
-            res.status(422).json({message: 'O campo é obrigatório'})
             return
         }
 
